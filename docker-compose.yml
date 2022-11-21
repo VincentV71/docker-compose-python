@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  web: # cf Dockerfile : Flask et Python, port 5000
+    build: . # = utilise l'image qui a été construite dans le dossier courant (par le Dockerfile) 
+    ports:
+      - "8000:5000"
+    volumes: # = on binde le dossier courant local au dossier "code" du container
+      - .:/code
+    environment: # = on définit un env de dév = recharge le code à chaque changement
+      FLASK_DEBUG: True 
+  redis:
+    image: "redis:alpine" # = charge depuis DockerHub
